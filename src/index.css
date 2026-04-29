@@ -1,0 +1,251 @@
+/* ============================================================
+   GLOBAL CSS – Design Tokens & Resets
+   Portfolio: Kalash Jaiswal | Full Stack MERN Developer
+   ============================================================ */
+
+/* ---------- Google Fonts are loaded via <head> link ---------- */
+
+/* ===================== CSS DESIGN TOKENS ===================== */
+:root {
+  /* --- Color Palette --- */
+  --color-bg-base:         #0D0E14;
+  --color-bg-surface:      #13151E;
+  --color-bg-elevated:     #1A1D2A;
+  --color-bg-card:         #1E2130;
+  --color-bg-card-hover:   #252840;
+  --color-bg-glass:        rgba(30, 33, 48, 0.55);
+  --color-bg-glass-border: rgba(255, 255, 255, 0.06);
+
+  /* Orange accent */
+  --color-accent:          #F97316;
+  --color-accent-light:    #FB923C;
+  --color-accent-dim:      rgba(249, 115, 22, 0.15);
+  --color-accent-glow:     rgba(249, 115, 22, 0.30);
+
+  /* Purple accent */
+  --color-purple:          #8B5CF6;
+  --color-purple-light:    #A78BFA;
+  --color-purple-dim:      rgba(139, 92, 246, 0.18);
+
+  /* Text */
+  --color-text-primary:    #FCFCFD;
+  --color-text-secondary:  #C4C9D9;
+  --color-text-muted:      #6B7280;
+  --color-text-faint:      #374151;
+
+  /* Borders */
+  --color-border:          rgba(255, 255, 255, 0.07);
+  --color-border-accent:   rgba(249, 115, 22, 0.35);
+
+  /* --- Typography --- */
+  --font-sans:    'Inter', system-ui, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', sans-serif;
+
+  --text-xs:   0.75rem;    /* 12px */
+  --text-sm:   0.875rem;   /* 14px */
+  --text-base: 1rem;       /* 16px */
+  --text-lg:   1.125rem;   /* 18px */
+  --text-xl:   1.25rem;    /* 20px */
+  --text-2xl:  1.5rem;     /* 24px */
+  --text-3xl:  1.875rem;   /* 30px */
+  --text-4xl:  2.25rem;    /* 36px */
+  --text-5xl:  3rem;       /* 48px */
+  --text-6xl:  3.75rem;    /* 60px */
+  --text-7xl:  4.5rem;     /* 72px */
+
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semi:    600;
+  --weight-bold:    700;
+  --weight-extra:   800;
+  --weight-black:   900;
+
+  /* --- Spacing --- */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-5:  1.25rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+
+  /* --- Borders & Radius --- */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
+
+  /* --- Shadows --- */
+  --shadow-sm:    0 1px 3px rgba(0,0,0,0.5);
+  --shadow-md:    0 4px 16px rgba(0,0,0,0.4);
+  --shadow-lg:    0 8px 32px rgba(0,0,0,0.5);
+  --shadow-glow:  0 0 40px var(--color-accent-glow);
+  --shadow-card:  0 2px 20px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.04);
+
+  /* --- Transitions --- */
+  --transition-fast:   150ms ease;
+  --transition-base:   250ms ease;
+  --transition-slow:   400ms ease;
+  --transition-spring: 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* --- Layout --- */
+  --container-max: 1200px;
+  --nav-height:    72px;
+}
+
+/* ===================== RESET & BASE ===================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-bg-base);
+  color: var(--color-text-primary);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+  font-family: inherit;
+  border: none;
+  background: none;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ===================== UTILITY CLASSES ===================== */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--space-6);
+}
+
+.section-padding {
+  padding-block: var(--space-24);
+}
+
+.text-accent {
+  color: var(--color-accent);
+}
+
+.text-purple {
+  color: var(--color-purple);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ===================== SCROLLBAR ===================== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-bg-base);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-bg-elevated);
+  border-radius: var(--radius-full);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-accent-dim);
+}
+
+/* ===================== SELECTION ===================== */
+::selection {
+  background: var(--color-accent-dim);
+  color: var(--color-accent-light);
+}
+
+/* ===================== GLOBAL ANIMATIONS ===================== */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 0 0 var(--color-accent-glow); }
+  50%       { box-shadow: 0 0 20px 6px var(--color-accent-glow); }
+}
+
+@keyframes spin-slow {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-10px); }
+}
+
+@keyframes swirl-drift {
+  0%   { transform: translate(0, 0) rotate(0deg); }
+  33%  { transform: translate(12px, -8px) rotate(120deg); }
+  66%  { transform: translate(-8px, 6px) rotate(240deg); }
+  100% { transform: translate(0, 0) rotate(360deg); }
+}
+
+@keyframes gradient-shift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% 0; }
+  to   { background-position: 200% 0; }
+}
+
+/* ===================== RESPONSIVE BREAKPOINTS ===================== */
+@media (max-width: 768px) {
+  :root {
+    --text-5xl: 2.25rem;
+    --text-6xl: 2.75rem;
+    --text-7xl: 3rem;
+  }
+  .section-padding {
+    padding-block: var(--space-16);
+  }
+  .container {
+    padding-inline: var(--space-4);
+  }
+}

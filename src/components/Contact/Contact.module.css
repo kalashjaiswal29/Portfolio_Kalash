@@ -1,0 +1,354 @@
+/* ============================================================
+   Contact.module.css
+   ============================================================ */
+
+.ctaSection {
+  background: var(--color-bg-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.ctaBg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 80% at 50% 50%, rgba(249,115,22,0.07) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 40% at 80% 20%, rgba(139,92,246,0.06) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.ctaInner {
+  position: relative;
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.ctaEmoji {
+  font-size: 3rem;
+  animation: float 3s ease-in-out infinite;
+  line-height: 1;
+}
+
+.ctaBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-border-accent);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semi);
+  color: var(--color-accent-light);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-3xl), 5vw, var(--text-5xl));
+  font-weight: var(--weight-extra);
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.ctaTitleAccent {
+  color: var(--color-accent);
+}
+
+.ctaSubtitle {
+  font-size: var(--text-base);
+  color: var(--color-text-muted);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+.emailForm {
+  display: flex;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 460px;
+}
+
+.emailInput {
+  flex: 1;
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  outline: none;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+}
+
+.emailInput::placeholder {
+  color: var(--color-text-muted);
+}
+
+.emailInput:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-dim);
+}
+
+.emailSubmit {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-full);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semi);
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-accent), #ea580c);
+  border: 1px solid transparent;
+  transition: transform var(--transition-spring), box-shadow var(--transition-base);
+  white-space: nowrap;
+}
+
+.emailSubmit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--color-accent-glow);
+}
+
+/* ---- Full contact form section ---- */
+.formSection {
+  background: var(--color-bg-surface);
+  position: relative;
+}
+
+.formSectionBg {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 50% 60% at 0% 50%, rgba(139,92,246,0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-16);
+  align-items: start;
+}
+
+.formInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+  padding-top: var(--space-2);
+}
+
+.formInfoBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-4);
+  border-radius: var(--radius-full);
+  background: var(--color-purple-dim);
+  border: 1px solid rgba(139,92,246,0.3);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semi);
+  color: var(--color-purple-light);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.formInfoTitle {
+  font-family: var(--font-display);
+  font-size: clamp(var(--text-2xl), 3vw, var(--text-4xl));
+  font-weight: var(--weight-extra);
+  letter-spacing: -0.03em;
+  color: var(--color-text-primary);
+  line-height: 1.2;
+}
+
+.formInfoTitleAccent {
+  color: var(--color-accent);
+}
+
+.formInfoDesc {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.75;
+}
+
+.contactDetails {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.contactItem {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.contactIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-accent-dim);
+  border: 1px solid var(--color-border-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+/* ---- Form ---- */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.formField {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.formLabel {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-secondary);
+}
+
+.formInput,
+.formTextarea {
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--color-border);
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  outline: none;
+  transition: border-color var(--transition-base), box-shadow var(--transition-base);
+  width: 100%;
+}
+
+.formInput::placeholder,
+.formTextarea::placeholder {
+  color: var(--color-text-muted);
+}
+
+.formInput:focus,
+.formTextarea:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-dim);
+}
+
+.formTextarea {
+  resize: vertical;
+  min-height: 140px;
+  line-height: 1.6;
+}
+
+.formSubmit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-8);
+  border-radius: var(--radius-full);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semi);
+  color: #fff;
+  background: linear-gradient(135deg, var(--color-accent), #ea580c);
+  border: 1px solid transparent;
+  transition: transform var(--transition-spring), box-shadow var(--transition-base);
+  align-self: flex-start;
+}
+
+.formSubmit:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px var(--color-accent-glow);
+}
+
+/* ---- Footer ---- */
+.footer {
+  background: var(--color-bg-base);
+  border-top: 1px solid var(--color-border);
+  padding-block: var(--space-8);
+}
+
+.footerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+  flex-wrap: wrap;
+}
+
+.footerBrand {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-bold);
+  letter-spacing: -0.5px;
+}
+
+.footerBrandAccent {
+  color: var(--color-accent);
+}
+
+.footerCopy {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+}
+
+.footerCopyAccent {
+  color: var(--color-accent);
+}
+
+.footerSocials {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.footerSocialBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  background: var(--color-bg-elevated);
+  transition: color var(--transition-base), border-color var(--transition-base), transform var(--transition-spring);
+}
+
+.footerSocialBtn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-border-accent);
+  transform: translateY(-3px);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .formGrid { grid-template-columns: 1fr; gap: var(--space-10); }
+  .formRow  { grid-template-columns: 1fr; }
+  .emailForm { flex-direction: column; }
+  .emailSubmit { align-self: stretch; justify-content: center; }
+  .footerInner { flex-direction: column; text-align: center; }
+  .footerSocials { justify-content: center; }
+}
