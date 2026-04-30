@@ -164,7 +164,11 @@ export default function Hero() {
               <div className={styles.profileRingOuter} aria-hidden="true" />
               <div className={styles.profileRingInner} aria-hidden="true" />
               <div className={styles.profileImgWrap}>
-                <div className={styles.profileFallback} aria-hidden="true">KJ</div>
+                <img
+                  src="/Kalash.jpeg"
+                  alt="Kalash Jaiswal"
+                  className={styles.profileImg}
+                />
               </div>
               <div className={styles.profileBadge} aria-label="Currently building status">
                 <span className={styles.badgeDot} aria-hidden="true" />

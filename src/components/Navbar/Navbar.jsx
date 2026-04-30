@@ -4,17 +4,17 @@ import { Briefcase } from 'lucide-react';
 import styles from './Navbar.module.css';
 
 const NAV_LINKS = [
-  { label: 'Home',    to: '/'        },
-  { label: 'About',   to: '/about'   },
+  { label: 'Home', to: '/' },
+  { label: 'About', to: '/about' },
   { label: 'Service', to: '/service' },
-  { label: 'Resume',  to: '/resume'  },
+  { label: 'Resume', to: '/resume' },
   { label: 'Project', to: '/project' },
   { label: 'Contact', to: '/contact' },
 ];
 
 export default function Navbar() {
-  const [scrolled, setScrolled]       = useState(false);
-  const [menuOpen, setMenuOpen]       = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
 
   const onScroll = useCallback(() => {
@@ -47,8 +47,8 @@ export default function Navbar() {
               <span className={styles.logoRingCircle} />
               <span className={styles.logoInitials}>KJ</span>
             </span>
-            <span className={styles.brandText}>
-              J<span className={styles.brandAccent}>CREA</span>
+            <span className={styles.brandText} style={{ color: '#FAF3E1' }}>
+              J<span className={styles.brandAccent}>Kalash</span>
             </span>
           </button>
 
