@@ -1,4 +1,5 @@
 import { Layers, Server, Zap } from 'lucide-react';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
 import styles from './Services.module.css';
 
 const SERVICES = [
@@ -12,7 +13,7 @@ const SERVICES = [
     glowColor: 'rgba(249,115,22,0.25)',
     iconBg: 'rgba(249,115,22,0.12)',
     iconBorder: 'rgba(249,115,22,0.3)',
-    iconColor: 'var(--color-accent)',
+    iconColor: '#F97316',          /* --color-accent */
   },
   {
     id: 'backend',
@@ -24,7 +25,7 @@ const SERVICES = [
     glowColor: 'rgba(139,92,246,0.25)',
     iconBg: 'rgba(139,92,246,0.12)',
     iconBorder: 'rgba(139,92,246,0.3)',
-    iconColor: 'var(--color-purple-light)',
+    iconColor: '#A78BFA',          /* --color-purple-light */
   },
   {
     id: 'realtime',
@@ -41,11 +42,18 @@ const SERVICES = [
 ];
 
 export default function Services() {
+  const sectionRef = useScrollReveal();
+
   return (
-    <section className={`${styles.section} section-padding`} id="services" aria-label="My Services">
+    <section
+      className={`${styles.section} section-padding`}
+      id="services"
+      aria-label="My Services"
+      ref={sectionRef}
+    >
       <div className={styles.sectionBg} aria-hidden="true" />
       <div className="container">
-        <header className={styles.header}>
+        <header className={styles.header} data-reveal data-reveal-delay="1">
           <span className={styles.badge}>What I Do</span>
           <h2 className={styles.title}>
             My <span className={styles.titleAccent}>Services</span>
@@ -56,11 +64,13 @@ export default function Services() {
         </header>
 
         <div className={styles.grid}>
-          {SERVICES.map(({ id, num, icon: Icon, title, desc, tags, glowColor, iconBg, iconBorder, iconColor }) => (
+          {SERVICES.map(({ id, num, icon: Icon, title, desc, tags, glowColor, iconBg, iconBorder, iconColor }, idx) => (
             <article
               key={id}
               className={styles.card}
               aria-label={`Service: ${title}`}
+              data-reveal="scale"
+              data-reveal-delay={String(idx + 2)}
             >
               <div
                 className={styles.cardGlow}
@@ -70,7 +80,11 @@ export default function Services() {
               <span className={styles.cardNum} aria-hidden="true">{num}</span>
               <div
                 className={styles.iconWrap}
-                style={{ '--icon-bg': iconBg, '--icon-border': iconBorder, '--icon-color': iconColor }}
+                style={{
+                  background:  iconBg,
+                  border:      `1px solid ${iconBorder}`,
+                  color:       iconColor,
+                }}
               >
                 <Icon size={24} aria-hidden="true" />
               </div>

@@ -25,40 +25,68 @@
 /* ---- Left visual ---- */
 .visual {
   position: relative;
-}
-
-.avatarWrap {
-  position: relative;
-  width: 340px;
-  aspect-ratio: 3/4;
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  border: 1px solid var(--color-border);
-  background: var(--color-bg-elevated);
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
-.avatarFallback {
-  font-family: var(--font-display);
-  font-weight: var(--weight-black);
-  font-size: 6rem;
-  color: var(--color-accent);
-  letter-spacing: -4px;
-  opacity: 0.7;
+/* --- Hero-style circular profile frame --- */
+.profileFrame {
+  position: relative;
+  width: clamp(240px, 28vw, 340px);
+  aspect-ratio: 1;
 }
 
-.avatarOverlay {
+.profileOrb {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--color-accent-glow),
+    var(--color-purple-dim),
+    var(--color-accent-glow)
+  );
+  filter: blur(40px);
+  animation: spin-slow 10s linear infinite;
+  opacity: 0.6;
+}
+
+.profileRingOuter {
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 2px dashed rgba(249,115,22,0.25);
+  animation: spin-slow 20s linear infinite reverse;
+}
+
+.profileRingInner {
+  position: absolute;
+  inset: 6px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(139, 92, 246, 0.2);
+  animation: spin-slow 15s linear infinite;
+}
+
+.profileImgWrap {
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(13,14,20,0.7) 0%, transparent 50%);
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid rgba(249,115,22,0.3);
+}
+
+.profileImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
 }
 
 .floatCard {
   position: absolute;
-  right: -24px;
-  bottom: 40px;
+  right: -16px;
+  bottom: -16px;
   background: var(--color-bg-glass);
   backdrop-filter: blur(16px);
   border: 1px solid var(--color-bg-glass-border);
@@ -68,7 +96,8 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-3);
-  min-width: 180px;
+  min-width: 168px;
+  z-index: 2;
 }
 
 .floatStat {
@@ -220,4 +249,5 @@
 @media (max-width: 900px) {
   .grid { grid-template-columns: 1fr; }
   .visual { display: none; }
+  .floatCard { right: 0; bottom: -8px; }
 }

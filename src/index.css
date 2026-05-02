@@ -193,6 +193,9 @@ ul, ol {
 }
 
 /* ===================== GLOBAL ANIMATIONS ===================== */
+
+/* fadeInUp / fadeIn removed — Hero now uses its own heroFadeUp keyframe.
+   Kept here only if other components still reference them via inline styles. */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(28px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -214,14 +217,7 @@ ul, ol {
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
-  50%       { transform: translateY(-10px); }
-}
-
-@keyframes swirl-drift {
-  0%   { transform: translate(0, 0) rotate(0deg); }
-  33%  { transform: translate(12px, -8px) rotate(120deg); }
-  66%  { transform: translate(-8px, 6px) rotate(240deg); }
-  100% { transform: translate(0, 0) rotate(360deg); }
+  50%       { transform: translateY(-8px); }
 }
 
 @keyframes gradient-shift {
@@ -232,7 +228,85 @@ ul, ol {
 
 @keyframes shimmer {
   from { background-position: -200% 0; }
-  to   { background-position: 200% 0; }
+  to   { background-position:  200% 0; }
+}
+
+/* ===================== SCROLL REVEAL SYSTEM ===================== */
+/*
+  Variants:
+    data-reveal           → slide up (default)
+    data-reveal="left"    → slide from left
+    data-reveal="right"   → slide from right
+    data-reveal="scale"   → scale up from 88%
+    data-reveal="blur"    → blur-clear + fade (premium feel)
+
+  Stagger: data-reveal-delay="1"–"10"  (90ms increments)
+*/
+
+[data-reveal] {
+  opacity: 0;
+  transition:
+    opacity   0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+    filter    0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+/* default — slide up */
+[data-reveal]:not([data-reveal="left"])
+             :not([data-reveal="right"])
+             :not([data-reveal="scale"])
+             :not([data-reveal="blur"]) {
+  transform: translateY(40px);
+}
+
+[data-reveal="left"]  { transform: translateX(-48px); }
+[data-reveal="right"] { transform: translateX(48px);  }
+[data-reveal="scale"] { transform: scale(0.88);       }
+[data-reveal="blur"]  { transform: translateY(24px); filter: blur(8px); }
+
+[data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+  filter: none;
+}
+
+/* Stagger delays — 90 ms steps */
+[data-reveal-delay="1"]  { transition-delay: 0.09s; }
+[data-reveal-delay="2"]  { transition-delay: 0.18s; }
+[data-reveal-delay="3"]  { transition-delay: 0.27s; }
+[data-reveal-delay="4"]  { transition-delay: 0.36s; }
+[data-reveal-delay="5"]  { transition-delay: 0.45s; }
+[data-reveal-delay="6"]  { transition-delay: 0.54s; }
+[data-reveal-delay="7"]  { transition-delay: 0.63s; }
+[data-reveal-delay="8"]  { transition-delay: 0.72s; }
+[data-reveal-delay="9"]  { transition-delay: 0.81s; }
+[data-reveal-delay="10"] { transition-delay: 0.90s; }
+
+/* Extra keyframes */
+@keyframes slideInUp {
+  from { opacity: 0; transform: translateY(40px); filter: blur(4px); }
+  to   { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(48px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@keyframes borderGlow {
+  0%, 100% { border-color: rgba(249,115,22,0.3); }
+  50%       { border-color: rgba(249,115,22,0.7); }
 }
 
 /* ===================== RESPONSIVE BREAKPOINTS ===================== */

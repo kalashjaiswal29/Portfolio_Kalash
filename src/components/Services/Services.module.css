@@ -77,6 +77,8 @@
   overflow: hidden;
   transition: transform var(--transition-spring), box-shadow var(--transition-base), border-color var(--transition-base);
   cursor: default;
+  display: flex;
+  flex-direction: column;
 }
 
 .card::before {
@@ -123,8 +125,10 @@
   align-items: center;
   justify-content: center;
   margin-bottom: var(--space-5);
+  /* Use `color` (not a CSS custom prop) so SVG currentColor works */
   color: var(--icon-color, var(--color-accent));
   transition: transform var(--transition-spring);
+  flex-shrink: 0;
 }
 
 .card:hover .iconWrap {
@@ -157,6 +161,7 @@
   color: var(--color-text-muted);
   line-height: 1.7;
   margin-bottom: var(--space-5);
+  flex: 1;  /* push tags to bottom of card so all cards align */
 }
 
 .tags {

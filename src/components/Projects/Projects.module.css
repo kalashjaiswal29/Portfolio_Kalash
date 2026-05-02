@@ -20,7 +20,7 @@
 
 .header {
   display: flex;
-  align-items: flex-end;
+  align-items: center;   /* vertically center badge+title block with See All button */
   justify-content: space-between;
   gap: var(--space-6);
   margin-bottom: var(--space-12);
@@ -95,7 +95,7 @@
   overflow: hidden;
   transition: transform var(--transition-spring), border-color var(--transition-base), box-shadow var(--transition-base);
   display: flex;
-  flex-direction: column;
+  flex-direction: column;  /* enable flex children to stretch */
 }
 
 .card:hover {
@@ -209,7 +209,7 @@
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   line-height: 1.65;
-  flex: 1;
+  flex: 1;   /* fills remaining space so cards equalize height in grid rows */
 }
 
 .cardTags {

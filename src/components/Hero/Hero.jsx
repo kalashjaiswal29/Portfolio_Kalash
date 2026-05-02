@@ -3,40 +3,24 @@ import { Code2, Users2, MessageSquare, ExternalLink } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import styles from './Hero.module.css';
 
-/* ---- Swirl symbol definitions ---- */
-const SWIRL_SYMBOLS = [
-  { char: '♥', x: 72, y: 18, size: '1.6rem', dur: '9s',  delay: '0s'   },
-  { char: '★', x: 85, y: 42, size: '1.2rem', dur: '11s', delay: '-2s'  },
-  { char: '✦', x: 60, y: 70, size: '1.8rem', dur: '7s',  delay: '-4s'  },
-  { char: '◆', x: 90, y: 65, size: '1rem',   dur: '13s', delay: '-1s'  },
-  { char: '✿', x: 65, y: 30, size: '1.4rem', dur: '10s', delay: '-5s'  },
-  { char: '☽', x: 78, y: 80, size: '1.5rem', dur: '8s',  delay: '-3s'  },
-  { char: '❋', x: 55, y: 55, size: '1.1rem', dur: '12s', delay: '-1.5s'},
-  { char: '⊕', x: 92, y: 28, size: '1.3rem', dur: '9.5s',delay: '-6s'  },
-  { char: '♦', x: 68, y: 88, size: '0.9rem', dur: '14s', delay: '-2.5s'},
-  { char: '✶', x: 82, y: 55, size: '1.7rem', dur: '8.5s',delay: '-7s'  },
-];
-
 const SOCIALS = [
-  { icon: Code2,        href: 'https://github.com/kalashjaiswal',    label: 'GitHub'   },
-  { icon: Users2,       href: 'https://linkedin.com/in/kalashjaiswal', label: 'LinkedIn' },
-  { icon: MessageSquare,href: 'https://twitter.com/kalashjaiswal',   label: 'Twitter'  },
+  { icon: Code2,         href: 'https://github.com/kalashjaiswal',     label: 'GitHub'   },
+  { icon: Users2,        href: 'https://linkedin.com/in/kalashjaiswal', label: 'LinkedIn' },
+  { icon: MessageSquare, href: 'https://twitter.com/kalashjaiswal',    label: 'Twitter'  },
 ];
 
 export default function Hero() {
-  const [scrollProgress, setScrollProgress] = useState(0); // 0 = top, 1 = fully scrolled
-  const rafRef   = useRef(null);
-  const heroRef  = useRef(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const rafRef  = useRef(null);
+  const heroRef = useRef(null);
 
   const handleScroll = useCallback(() => {
-    if (rafRef.current) return; // already queued
+    if (rafRef.current) return;
     rafRef.current = requestAnimationFrame(() => {
       rafRef.current = null;
       const hero = heroRef.current;
       if (!hero) return;
-      const scrollY    = window.scrollY;
-      const threshold  = hero.offsetHeight * 0.45; // transition happens over 45% of hero height
-      const progress   = Math.min(1, Math.max(0, scrollY / threshold));
+      const progress = Math.min(1, Math.max(0, window.scrollY / (hero.offsetHeight * 0.55)));
       setScrollProgress(progress);
     });
   }, []);
@@ -49,54 +33,33 @@ export default function Hero() {
     };
   }, [handleScroll]);
 
-  // Derived opacities
-  const ghostOpacity = Math.max(0, 1 - scrollProgress * 2);   // fades out first
-  const swirlOpacity = Math.min(1, Math.max(0, (scrollProgress - 0.3) * 2.5)); // fades in after 30% scroll
+  /* Aurora morphs from warm orange-right / purple-left → centered purple as we scroll */
+  const auroraStyle = {
+    '--aurora-a-x':  `${75 - scrollProgress * 25}%`,   // orange orb drifts left
+    '--aurora-a-op': `${0.22 - scrollProgress * 0.08}`, // dims slightly
+    '--aurora-b-x':  `${25 + scrollProgress * 25}%`,   // purple orb drifts right
+    '--aurora-b-op': `${0.12 + scrollProgress * 0.06}`, // brightens slightly
+    '--grid-op':     `${0.04 - scrollProgress * 0.02}`, // grid fades
+  };
 
   return (
     <section className={styles.hero} ref={heroRef} id="hero" aria-label="Hero section">
-      {/* --- Background Layer: Ghost Name --- */}
-      <div
-        className={styles.bgGhostName}
-        aria-hidden="true"
-        style={{ opacity: ghostOpacity }}
-      >
-        <span className={styles.ghostNameText}>KALASH JAISWAL</span>
+
+      {/* ── Aurora background ─────────────────────────────────── */}
+      <div className={styles.aurora} aria-hidden="true" style={auroraStyle}>
+        <div className={styles.auroraOrbA} />
+        <div className={styles.auroraOrbB} />
+        <div className={styles.dotGrid} />
       </div>
 
-      {/* --- Background Layer: Swirl Texture --- */}
-      <div
-        className={styles.bgSwirl}
-        aria-hidden="true"
-        style={{ opacity: swirlOpacity }}
-      >
-        <div className={styles.swirlGradient} />
-        <div className={styles.swirlCanvas}>
-          {SWIRL_SYMBOLS.map((s, i) => (
-            <span
-              key={i}
-              className={styles.swirlSymbol}
-              style={{
-                left:       `${s.x}%`,
-                top:        `${s.y}%`,
-                fontSize:   s.size,
-                '--duration': s.dur,
-                '--delay':    s.delay,
-              }}
-            >
-              {s.char}
-            </span>
-          ))}
-        </div>
-      </div>
-
-      {/* --- Subtle noise overlay --- */}
+      {/* ── Noise grain ───────────────────────────────────────── */}
       <div className={styles.noise} aria-hidden="true" />
 
-      {/* --- Main Content --- */}
+      {/* ── Main content ──────────────────────────────────────── */}
       <div className={styles.content}>
         <div className={`container ${styles.inner}`}>
-          {/* Left: Text Column */}
+
+          {/* Left: Text column */}
           <div className={styles.textCol}>
             <span className={styles.greetBadge}>
               <span className={styles.greetDot} aria-hidden="true" />
@@ -157,10 +120,10 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right: Profile Column */}
+          {/* Right: Profile column */}
           <div className={styles.profileCol}>
             <div className={styles.profileFrame} aria-label="Profile photo">
-              <div className={styles.profileOrb} aria-hidden="true" />
+              <div className={styles.profileOrb}   aria-hidden="true" />
               <div className={styles.profileRingOuter} aria-hidden="true" />
               <div className={styles.profileRingInner} aria-hidden="true" />
               <div className={styles.profileImgWrap}>
@@ -171,21 +134,23 @@ export default function Hero() {
                 />
               </div>
               <div className={styles.profileBadge} aria-label="Currently building status">
-                <span className={styles.badgeDot} aria-hidden="true" />
+                <span className={styles.badgeDot}  aria-hidden="true" />
                 <span className={styles.badgeText}>Building GetIntern.in</span>
               </div>
             </div>
           </div>
+
         </div>
       </div>
 
-      {/* Scroll hint */}
+      {/* ── Scroll hint ───────────────────────────────────────── */}
       <div className={styles.scrollHint} aria-hidden="true">
         <div className={styles.scrollMouse}>
           <div className={styles.scrollDot} />
         </div>
         <span className={styles.scrollLabel}>Scroll</span>
       </div>
+
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import { Code2, ExternalLink, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { useScrollReveal } from '../../hooks/useScrollReveal';
 import styles from './Projects.module.css';
 
 const PROJECTS = [
@@ -69,12 +70,18 @@ const STATUS_LABELS = { live: 'Live', wip: 'WIP', complete: 'Completed' };
 
 export default function Projects({ limitTo = null }) {
   const displayed = limitTo ? PROJECTS.slice(0, limitTo) : PROJECTS;
+  const sectionRef = useScrollReveal();
 
   return (
-    <section className={`${styles.section} section-padding`} id="projects" aria-label="Portfolio Projects">
+    <section
+      className={`${styles.section} section-padding`}
+      id="projects"
+      aria-label="Portfolio Projects"
+      ref={sectionRef}
+    >
       <div className={styles.sectionBg} aria-hidden="true" />
       <div className="container">
-        <header className={styles.header}>
+        <header className={styles.header} data-reveal data-reveal-delay="1">
           <div className={styles.headerLeft}>
             <span className={styles.badge}>Selected Work</span>
             <h2 className={styles.title}>
@@ -88,11 +95,13 @@ export default function Projects({ limitTo = null }) {
         </header>
 
         <div className={styles.grid}>
-          {displayed.map(({ id, title, desc, tags, status, featured, gradient, github, demo, label }) => (
+          {displayed.map(({ id, title, desc, tags, status, featured, gradient, github, demo, label }, idx) => (
             <article
               key={id}
               className={`${styles.card}${featured ? ' ' + styles.featured : ''}`}
               aria-label={`Project: ${title}`}
+              data-reveal
+              data-reveal-delay={String(Math.min(idx + 2, 7))}
             >
               {/* Media */}
               <div className={styles.cardMedia}>

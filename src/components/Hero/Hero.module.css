@@ -1,5 +1,5 @@
 /* ============================================================
-   Hero.module.css
+   Hero.module.css  –  clean aurora-based hero
    ============================================================ */
 
 .hero {
@@ -11,84 +11,88 @@
   padding-top: var(--nav-height);
 }
 
-/* ---- BACKGROUND LAYER 1: Ghost Name Text (State 1 – at top) ---- */
-.bgGhostName {
+/* ──────────────────────────────────────────────────────────
+   AURORA BACKGROUND
+   Two soft radial gradient orbs whose x-positions and
+   opacities are driven by --aurora-* CSS custom properties
+   set by the scroll handler in Hero.jsx.
+   ────────────────────────────────────────────────────────── */
+.aurora {
   position: absolute;
   inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   pointer-events: none;
   z-index: 0;
-  transition: opacity 0.6s ease;
-}
-
-.ghostNameText {
-  font-family: var(--font-display);
-  font-weight: var(--weight-black);
-  font-size: clamp(4rem, 14vw, 14rem);
-  letter-spacing: -0.04em;
-  line-height: 1;
-  color: rgba(255, 255, 255, 0.055);
-  white-space: nowrap;
-  user-select: none;
-  text-transform: uppercase;
-  text-align: center;
-}
-
-/* ---- BACKGROUND LAYER 2: Swirl Texture (State 2 – scrolled) ---- */
-.bgSwirl {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  transition: opacity 0.8s ease;
-}
-
-.swirlGradient {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-      ellipse 70% 60% at 75% 50%,
-      rgba(249, 115, 22, 0.22) 0%,
-      rgba(139, 92, 246, 0.12) 45%,
-      transparent 75%
-    ),
-    radial-gradient(
-      ellipse 50% 70% at 25% 50%,
-      rgba(139, 92, 246, 0.08) 0%,
-      transparent 60%
-    );
-}
-
-.swirlCanvas {
-  position: absolute;
-  inset: 0;
   overflow: hidden;
 }
 
-.swirlSymbol {
+/* Orange warm orb – starts right, drifts toward center on scroll */
+.auroraOrbA {
   position: absolute;
-  opacity: 0.18;
-  color: var(--color-purple-light);
-  animation: swirl-drift var(--duration, 8s) ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
-  font-size: var(--size, 1.2rem);
-  user-select: none;
+  top: -10%;
+  left: var(--aurora-a-x, 72%);
+  translate: -50% 0;
+  width: 60vw;
+  height: 70vh;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(249, 115, 22, 0.28) 0%,
+    rgba(249, 115, 22, 0.10) 40%,
+    transparent 70%
+  );
+  opacity: var(--aurora-a-op, 0.22);
+  filter: blur(60px);
+  animation: aurora-breathe 10s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
-/* ---- Base noise overlay ---- */
+/* Purple cool orb – starts left, drifts toward center on scroll */
+.auroraOrbB {
+  position: absolute;
+  bottom: -5%;
+  left: var(--aurora-b-x, 25%);
+  translate: -50% 0;
+  width: 55vw;
+  height: 65vh;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(139, 92, 246, 0.22) 0%,
+    rgba(139, 92, 246, 0.08) 40%,
+    transparent 70%
+  );
+  opacity: var(--aurora-b-op, 0.12);
+  filter: blur(70px);
+  animation: aurora-breathe 13s ease-in-out infinite reverse;
+  will-change: transform, opacity;
+}
+
+/* Subtle dot grid */
+.dotGrid {
+  position: absolute;
+  inset: 0;
+  opacity: var(--grid-op, 0.04);
+  background-image:
+    radial-gradient(circle, rgba(255,255,255,0.55) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* ──────────────────────────────────────────────────────────
+   NOISE OVERLAY
+   ────────────────────────────────────────────────────────── */
 .noise {
   position: absolute;
   inset: 0;
-  opacity: 0.025;
+  opacity: 0.022;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
   background-size: 200px 200px;
   pointer-events: none;
   z-index: 1;
 }
 
-/* ---- Content ---- */
+/* ──────────────────────────────────────────────────────────
+   LAYOUT
+   ────────────────────────────────────────────────────────── */
 .content {
   position: relative;
   z-index: 2;
@@ -104,13 +108,17 @@
   padding-block: var(--space-16);
 }
 
-/* ---- Left text column ---- */
+/* ──────────────────────────────────────────────────────────
+   TEXT COLUMN  — staggered entry with longer breathing room
+   ────────────────────────────────────────────────────────── */
 .textCol {
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
 }
 
+/* Each child is given a progressively longer delay so it
+   appears to cascade into place smoothly. */
 .greetBadge {
   display: inline-flex;
   align-items: center;
@@ -123,7 +131,7 @@
   font-weight: var(--weight-medium);
   color: var(--color-accent-light);
   width: fit-content;
-  animation: fadeInUp 0.6s ease both;
+  animation: heroFadeUp 0.9s 0.1s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .greetDot {
@@ -138,7 +146,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
-  animation: fadeInUp 0.6s 0.1s ease both;
+  animation: heroFadeUp 0.9s 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .h1 {
@@ -168,7 +176,7 @@
   color: var(--color-text-muted);
   line-height: 1.7;
   max-width: 480px;
-  animation: fadeInUp 0.6s 0.2s ease both;
+  animation: heroFadeUp 0.9s 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .ctaRow {
@@ -176,9 +184,10 @@
   align-items: center;
   gap: var(--space-4);
   flex-wrap: wrap;
-  animation: fadeInUp 0.6s 0.3s ease both;
+  animation: heroFadeUp 0.9s 0.58s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+/* CTA buttons */
 .btnPrimary {
   display: inline-flex;
   align-items: center;
@@ -190,14 +199,16 @@
   color: #fff;
   background: linear-gradient(135deg, var(--color-accent) 0%, #ea580c 100%);
   border: 1px solid rgba(249,115,22,0.3);
-  transition: transform var(--transition-spring), box-shadow var(--transition-base);
+  transition:
+    transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    box-shadow 250ms ease;
   letter-spacing: 0.3px;
   white-space: nowrap;
 }
 
 .btnPrimary:hover {
-  transform: translateY(-3px) scale(1.03);
-  box-shadow: 0 8px 28px var(--color-accent-glow);
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 10px 32px var(--color-accent-glow);
 }
 
 .btnOutline {
@@ -211,24 +222,60 @@
   color: var(--color-text-primary);
   background: transparent;
   border: 1.5px solid var(--color-border);
-  transition: transform var(--transition-spring), border-color var(--transition-base), background var(--transition-base);
+  transition:
+    transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1),
+    border-color 250ms ease,
+    background 250ms ease;
   white-space: nowrap;
   letter-spacing: 0.3px;
 }
 
 .btnOutline:hover {
-  transform: translateY(-3px) scale(1.03);
+  transform: translateY(-3px) scale(1.04);
   border-color: var(--color-accent-light);
   background: var(--color-accent-dim);
   color: var(--color-accent-light);
 }
 
+/* Social strip */
+.socialStrip {
+  display: flex;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+  animation: heroFadeUp 0.9s 0.70s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.socialBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  background: var(--color-bg-elevated);
+  transition:
+    color 250ms ease,
+    border-color 250ms ease,
+    background 250ms ease,
+    transform 350ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.socialBtn:hover {
+  color: var(--color-accent);
+  border-color: var(--color-border-accent);
+  background: var(--color-accent-dim);
+  transform: translateY(-4px);
+}
+
+/* Stats row */
 .statsRow {
   display: flex;
   gap: var(--space-8);
   padding-top: var(--space-4);
   border-top: 1px solid var(--color-border);
-  animation: fadeInUp 0.6s 0.4s ease both;
+  animation: heroFadeUp 0.9s 0.84s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .stat {
@@ -252,12 +299,14 @@
   text-transform: uppercase;
 }
 
-/* ---- Right profile column ---- */
+/* ──────────────────────────────────────────────────────────
+   PROFILE COLUMN
+   ────────────────────────────────────────────────────────── */
 .profileCol {
   display: flex;
   justify-content: center;
   align-items: center;
-  animation: fadeInUp 0.7s 0.15s ease both;
+  animation: heroFadeUp 0.9s 0.22s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .profileFrame {
@@ -312,21 +361,6 @@
   border-radius: 50%;
 }
 
-.profileFallback {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--color-bg-elevated) 0%, var(--color-bg-card) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: var(--font-display);
-  font-weight: var(--weight-black);
-  font-size: 5rem;
-  color: var(--color-accent);
-  letter-spacing: -2px;
-}
-
 .profileBadge {
   position: absolute;
   bottom: 10px;
@@ -358,35 +392,9 @@
   white-space: nowrap;
 }
 
-/* ---- Social strip ---- */
-.socialStrip {
-  display: flex;
-  gap: var(--space-3);
-  padding-top: var(--space-4);
-  animation: fadeInUp 0.6s 0.5s ease both;
-}
-
-.socialBtn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border-radius: var(--radius-md);
-  border: 1px solid var(--color-border);
-  color: var(--color-text-muted);
-  background: var(--color-bg-elevated);
-  transition: color var(--transition-base), border-color var(--transition-base), transform var(--transition-spring), background var(--transition-base);
-}
-
-.socialBtn:hover {
-  color: var(--color-accent);
-  border-color: var(--color-border-accent);
-  background: var(--color-accent-dim);
-  transform: translateY(-3px);
-}
-
-/* ---- Scroll indicator ---- */
+/* ──────────────────────────────────────────────────────────
+   SCROLL INDICATOR
+   ────────────────────────────────────────────────────────── */
 .scrollHint {
   position: absolute;
   bottom: var(--space-8);
@@ -397,7 +405,7 @@
   align-items: center;
   gap: var(--space-2);
   z-index: 2;
-  animation: fadeIn 1s 1s ease both;
+  animation: heroFadeIn 1s 1.2s ease both;
 }
 
 .scrollMouse {
@@ -415,7 +423,7 @@
   height: 8px;
   border-radius: var(--radius-full);
   background: var(--color-accent);
-  animation: float 1.5s ease-in-out infinite;
+  animation: float 1.6s ease-in-out infinite;
 }
 
 .scrollLabel {
@@ -425,7 +433,36 @@
   letter-spacing: 1.5px;
 }
 
-/* ---- Responsive ---- */
+/* ──────────────────────────────────────────────────────────
+   KEYFRAMES – hero-local
+   ────────────────────────────────────────────────────────── */
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(32px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes aurora-breathe {
+  0%, 100% { transform: scale(1)   rotate(0deg); }
+  33%       { transform: scale(1.08) rotate(4deg); }
+  66%       { transform: scale(0.95) rotate(-3deg); }
+}
+
+/* ──────────────────────────────────────────────────────────
+   RESPONSIVE
+   ────────────────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .inner {
     grid-template-columns: 1fr;
@@ -437,22 +474,9 @@
     align-items: center;
     order: 2;
   }
-  .profileCol {
-    order: 1;
-  }
-  .tagline {
-    max-width: 100%;
-  }
-  .statsRow {
-    justify-content: center;
-  }
-  .socialStrip {
-    justify-content: center;
-  }
-  .profileFrame {
-    width: 220px;
-  }
-  .ghostNameText {
-    font-size: clamp(2.5rem, 12vw, 6rem);
-  }
+  .profileCol  { order: 1; }
+  .tagline     { max-width: 100%; }
+  .statsRow    { justify-content: center; }
+  .socialStrip { justify-content: center; }
+  .profileFrame { width: 220px; }
 }

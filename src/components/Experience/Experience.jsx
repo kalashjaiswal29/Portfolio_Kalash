@@ -1,3 +1,4 @@
+import { useScrollReveal } from '../../hooks/useScrollReveal';
 import styles from './Experience.module.css';
 
 const EXPERIENCE = [
@@ -34,10 +35,17 @@ const EXPERIENCE = [
 ];
 
 export default function Experience() {
+  const sectionRef = useScrollReveal();
+
   return (
-    <section className={`${styles.section} section-padding`} id="experience" aria-label="Experience">
+    <section
+      className={`${styles.section} section-padding`}
+      id="experience"
+      aria-label="Experience"
+      ref={sectionRef}
+    >
       <div className="container">
-        <header className={styles.header}>
+        <header className={styles.header} data-reveal data-reveal-delay="1">
           <span className={styles.badge}>My Journey</span>
           <h2 className={styles.title}>
             Work <span className={styles.titleAccent}>Experience</span>
@@ -45,8 +53,8 @@ export default function Experience() {
         </header>
 
         <ol className={styles.timeline}>
-          {EXPERIENCE.map(({ id, role, company, live, period, desc, highlights, skills }) => (
-            <li key={id} className={styles.item}>
+          {EXPERIENCE.map(({ id, role, company, live, period, desc, highlights, skills }, idx) => (
+            <li key={id} className={styles.item} data-reveal data-reveal-delay={String(idx + 2)}>
               {/* Timeline dot */}
               <div className={styles.dotCol} aria-hidden="true">
                 <div className={styles.dot}>
