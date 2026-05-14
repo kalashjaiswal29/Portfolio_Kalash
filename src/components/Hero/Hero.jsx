@@ -1,17 +1,17 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
-import { Code2, Users2, MessageSquare, ExternalLink } from 'lucide-react';
+import { Code2, Users2, Mail, ExternalLink, FileText } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import styles from './Hero.module.css';
 
 const SOCIALS = [
-  { icon: Code2,         href: 'https://github.com/kalashjaiswal',     label: 'GitHub'   },
-  { icon: Users2,        href: 'https://linkedin.com/in/kalashjaiswal', label: 'LinkedIn' },
-  { icon: MessageSquare, href: 'https://twitter.com/kalashjaiswal',    label: 'Twitter'  },
+  { icon: Code2, href: 'https://github.com/kalashjaiswal29', label: 'GitHub' },
+  { icon: Users2, href: 'https://www.linkedin.com/in/kalash-jaiswal-15bb6b323/', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:kalashjaiswal29@gmail.com', label: 'Email' },
 ];
 
 export default function Hero() {
   const [scrollProgress, setScrollProgress] = useState(0);
-  const rafRef  = useRef(null);
+  const rafRef = useRef(null);
   const heroRef = useRef(null);
 
   const handleScroll = useCallback(() => {
@@ -35,11 +35,11 @@ export default function Hero() {
 
   /* Aurora morphs from warm orange-right / purple-left → centered purple as we scroll */
   const auroraStyle = {
-    '--aurora-a-x':  `${75 - scrollProgress * 25}%`,   // orange orb drifts left
+    '--aurora-a-x': `${75 - scrollProgress * 25}%`,   // orange orb drifts left
     '--aurora-a-op': `${0.22 - scrollProgress * 0.08}`, // dims slightly
-    '--aurora-b-x':  `${25 + scrollProgress * 25}%`,   // purple orb drifts right
+    '--aurora-b-x': `${25 + scrollProgress * 25}%`,   // purple orb drifts right
     '--aurora-b-op': `${0.12 + scrollProgress * 0.06}`, // brightens slightly
-    '--grid-op':     `${0.04 - scrollProgress * 0.02}`, // grid fades
+    '--grid-op': `${0.04 - scrollProgress * 0.02}`, // grid fades
   };
 
   return (
@@ -75,18 +75,24 @@ export default function Hero() {
             </div>
 
             <p className={styles.tagline}>
-              Building robust backend architectures and seamless user experiences.
-              From idea to production — I craft digital products that scale.
-            </p>
+              Crafting engaging frontend UIs and architecting robust backend systems. From concept to production, I build scalable digital products that deliver seamless user experiences.</p>
 
             <div className={styles.ctaRow}>
               <Link to="/project" className={styles.btnPrimary} id="hero-portfolio-btn">
                 <ExternalLink size={16} aria-hidden="true" />
                 Portfolio
               </Link>
-              <Link to="/contact" className={styles.btnOutline} id="hero-hire-btn">
-                Hire Me
-              </Link>
+
+              <a
+                href="https://drive.google.com/file/d/16xM56eVytGk2GkrN8FNnWeB6NXQQUsaf/view?usp=sharing"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.btnOutline}
+                id="hero-view-cv-btn"
+              >
+                <FileText size={16} aria-hidden="true" />
+                View CV
+              </a>
             </div>
 
             <div className={styles.socialStrip} aria-label="Social media links">
@@ -105,12 +111,12 @@ export default function Hero() {
             </div>
 
             <div className={styles.statsRow} aria-label="Key stats">
-              <div className={styles.stat}>
-                <span className={styles.statNum}>2+</span>
+              {/* <div className={styles.stat}>
+                <span className={styles.statNum}>1+</span>
                 <span className={styles.statLabel}>Yrs Experience</span>
-              </div>
+              </div> */}
               <div className={styles.stat}>
-                <span className={styles.statNum}>10+</span>
+                <span className={styles.statNum}>3+</span>
                 <span className={styles.statLabel}>Projects</span>
               </div>
               <div className={styles.stat}>
@@ -123,7 +129,7 @@ export default function Hero() {
           {/* Right: Profile column */}
           <div className={styles.profileCol}>
             <div className={styles.profileFrame} aria-label="Profile photo">
-              <div className={styles.profileOrb}   aria-hidden="true" />
+              <div className={styles.profileOrb} aria-hidden="true" />
               <div className={styles.profileRingOuter} aria-hidden="true" />
               <div className={styles.profileRingInner} aria-hidden="true" />
               <div className={styles.profileImgWrap}>
@@ -134,7 +140,7 @@ export default function Hero() {
                 />
               </div>
               <div className={styles.profileBadge} aria-label="Currently building status">
-                <span className={styles.badgeDot}  aria-hidden="true" />
+                <span className={styles.badgeDot} aria-hidden="true" />
                 <span className={styles.badgeText}>Building GetIntern.in</span>
               </div>
             </div>
@@ -143,13 +149,7 @@ export default function Hero() {
         </div>
       </div>
 
-      {/* ── Scroll hint ───────────────────────────────────────── */}
-      <div className={styles.scrollHint} aria-hidden="true">
-        <div className={styles.scrollMouse}>
-          <div className={styles.scrollDot} />
-        </div>
-        <span className={styles.scrollLabel}>Scroll</span>
-      </div>
+
 
     </section>
   );

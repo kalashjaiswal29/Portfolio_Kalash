@@ -1,17 +1,17 @@
-import { GraduationCap, Briefcase, Download } from 'lucide-react';
+import { GraduationCap, Briefcase, FileText } from 'lucide-react';
 import styles from './Resume.module.css';
 
 const EDUCATION = [
   {
     title: 'Bachelor of Technology – Computer Science',
-    org: 'Your University Name',
-    period: '2021 – 2025',
-    desc: 'Focused on software engineering, data structures, algorithms, and modern web technologies.',
+    org: 'Shri Mata Vaishno Devi University Katra',
+    period: '2024 – 2028',
+    desc: 'Applying core computer science principles to real-world software engineering. Deeply focused on mastering data structures, optimizing algorithms, and architecting scalable web applications.',
   },
   {
     title: 'Higher Secondary Education (PCM)',
-    org: 'Your School Name',
-    period: '2019 – 2021',
+    org: 'GN National Public School Gorakhnath GKP',
+    period: '2022 – 2024',
     desc: 'Physics, Chemistry, and Mathematics with strong academic performance.',
   },
 ];
@@ -20,20 +20,20 @@ const EXPERIENCE = [
   {
     title: 'Founder & Full Stack Developer',
     org: 'GetIntern.in',
-    period: '2023 – Present',
-    desc: 'Built and launched an MSME-registered virtual internship platform. Manages task automation, certificate generation, and user roles.',
+    period: '2026 – Present',
+    desc: 'Built and launched an MSME-registered virtual internship platform. Manages task automation, certificate generation.',
   },
   {
     title: 'Freelance MERN Developer',
     org: 'Self-Employed',
-    period: '2022 – Present',
-    desc: 'Delivered multiple client projects including REST APIs, React frontends, and full-stack applications.',
+    period: '2026 – Present',
+    desc: 'Designed and developed responsive, high-performance static websites to help local businesses establish a professional digital presence.',
   },
   {
     title: 'Open Source Contributor',
     org: 'GitHub',
-    period: '2022 – Present',
-    desc: 'Contributing to open-source MERN ecosystem tools and building reusable React component libraries.',
+    period: '2026 – Present',
+    desc: 'Contributing to open-source MERN ecosystem tools.',
   },
 ];
 
@@ -48,14 +48,14 @@ export default function Resume() {
             <span className={styles.titleAccent}>Experience</span>
           </h1>
           <a
-            href="/resume.pdf"
-            download
-            className={styles.downloadBtn}
-            id="resume-download-btn"
-            aria-label="Download PDF resume"
+            href="https://drive.google.com/file/d/16xM56eVytGk2GkrN8FNnWeB6NXQQUsaf/view?usp=sharing"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.btnPrimary}
+            id="hero-view-cv-btn"
           >
-            <Download size={16} aria-hidden="true" />
-            Download CV
+            <FileText size={16} aria-hidden="true" />
+            View CV
           </a>
         </header>
 

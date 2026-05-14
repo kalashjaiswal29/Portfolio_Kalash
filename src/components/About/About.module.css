@@ -5,13 +5,12 @@
 .section {
   background: var(--color-bg-base);
   position: relative;
-  overflow: hidden;
 }
 
 .sectionBg {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse 60% 50% at 100% 50%, rgba(139,92,246,0.06) 0%, transparent 65%);
+  background: radial-gradient(ellipse 60% 50% at 100% 50%, rgba(139, 92, 246, 0.06) 0%, transparent 65%);
   pointer-events: none;
 }
 
@@ -19,12 +18,14 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-16);
-  align-items: center;
+  align-items: start;
 }
 
 /* ---- Left visual ---- */
 .visual {
-  position: relative;
+  position: sticky;
+  top: 0;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,12 +42,10 @@
   position: absolute;
   inset: -20px;
   border-radius: 50%;
-  background: conic-gradient(
-    from 0deg,
-    var(--color-accent-glow),
-    var(--color-purple-dim),
-    var(--color-accent-glow)
-  );
+  background: conic-gradient(from 0deg,
+      var(--color-accent-glow),
+      var(--color-purple-dim),
+      var(--color-accent-glow));
   filter: blur(40px);
   animation: spin-slow 10s linear infinite;
   opacity: 0.6;
@@ -56,7 +55,7 @@
   position: absolute;
   inset: -6px;
   border-radius: 50%;
-  border: 2px dashed rgba(249,115,22,0.25);
+  border: 2px dashed rgba(249, 115, 22, 0.25);
   animation: spin-slow 20s linear infinite reverse;
 }
 
@@ -73,7 +72,7 @@
   inset: 0;
   border-radius: 50%;
   overflow: hidden;
-  border: 3px solid rgba(249,115,22,0.3);
+  border: 3px solid rgba(249, 115, 22, 0.3);
 }
 
 .profileImg {
@@ -85,8 +84,8 @@
 
 .floatCard {
   position: absolute;
-  right: -16px;
-  bottom: -16px;
+  right: 30px;
+  bottom: 90px;
   background: var(--color-bg-glass);
   backdrop-filter: blur(16px);
   border: 1px solid var(--color-bg-glass-border);
@@ -134,7 +133,7 @@
   padding: var(--space-1) var(--space-4);
   border-radius: var(--radius-full);
   background: var(--color-purple-dim);
-  border: 1px solid rgba(139,92,246,0.3);
+  border: 1px solid rgba(139, 92, 246, 0.3);
   font-size: var(--text-xs);
   font-weight: var(--weight-semi);
   color: var(--color-purple-light);
@@ -247,7 +246,16 @@
 }
 
 @media (max-width: 900px) {
-  .grid { grid-template-columns: 1fr; }
-  .visual { display: none; }
-  .floatCard { right: 0; bottom: -8px; }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .visual {
+    display: none;
+  }
+
+  .floatCard {
+    right: 0;
+    bottom: -8px;
+  }
 }

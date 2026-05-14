@@ -7,9 +7,9 @@ const SERVICES = [
     id: 'fullstack',
     num: '01',
     icon: Layers,
-    title: 'Full-Stack Architecture',
-    desc: 'Designing scalable, production-ready web applications with React on the frontend and Node.js on the backend. Clean code, modular structure, and solid DevOps pipelines.',
-    tags: ['React', 'Node.js', 'REST APIs', 'Architecture'],
+    title: 'Full-Stack Development',
+    desc: 'Building responsive, complete web applications from the ground up. Integrating dynamic React frontends with robust Node.js backends to deliver seamless user experiences.',
+    tags: ['React', 'Node.js', 'REST APIs'],
     glowColor: 'rgba(249,115,22,0.25)',
     iconBg: 'rgba(249,115,22,0.12)',
     iconBorder: 'rgba(249,115,22,0.3)',
@@ -59,8 +59,7 @@ export default function Services() {
             My <span className={styles.titleAccent}>Services</span>
           </h2>
           <p className={styles.subtitle}>
-            End-to-end solutions from architecture to deployment.
-          </p>
+            Building robust digital products from concept to production.          </p>
         </header>
 
         <div className={styles.grid}>
@@ -81,9 +80,9 @@ export default function Services() {
               <div
                 className={styles.iconWrap}
                 style={{
-                  background:  iconBg,
-                  border:      `1px solid ${iconBorder}`,
-                  color:       iconColor,
+                  background: iconBg,
+                  border: `1px solid ${iconBorder}`,
+                  color: iconColor,
                 }}
               >
                 <Icon size={24} aria-hidden="true" />

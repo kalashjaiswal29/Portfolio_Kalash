@@ -4,9 +4,9 @@ import { useScrollReveal } from '../../hooks/useScrollReveal';
 import styles from './Contact.module.css';
 
 const SOCIALS = [
-  { icon: Code2, href: 'https://github.com/kalashjaiswal', label: 'GitHub' },
-  { icon: Users2, href: 'https://linkedin.com/in/kalashjaiswal', label: 'LinkedIn' },
-  { icon: MessageSquare, href: 'https://twitter.com/kalashjaiswal', label: 'Twitter' },
+  { icon: Code2, href: 'https://github.com/kalashjaiswal29', label: 'GitHub' },
+  { icon: Users2, href: 'https://www.linkedin.com/in/kalash-jaiswal-15bb6b323/', label: 'LinkedIn' },
+  { icon: Mail, href: 'mailto:kalashjaiswal29@gmail.com', label: 'Email' },
 ];
 
 function Footer() {
@@ -137,11 +137,11 @@ export default function Contact() {
               <div className={styles.contactDetails}>
                 <div className={styles.contactItem}>
                   <div className={styles.contactIcon}><Mail size={16} aria-hidden="true" /></div>
-                  <a href="mailto:kalash@getintern.in">kalash@getintern.in</a>
+                  <a href="mailto:kalashjaiswal57@gmail.com">kalashjaiswal57@gmail.com</a>
                 </div>
                 <div className={styles.contactItem}>
                   <div className={styles.contactIcon}><MapPin size={16} aria-hidden="true" /></div>
-                  <span>India</span>
+                  <span>Uttar Pradesh, India</span>
                 </div>
               </div>
             </div>
@@ -172,7 +172,7 @@ export default function Contact() {
                         type="text"
                         value={formData.name}
                         onChange={handleFormChange}
-                        placeholder="John Doe"
+                        placeholder="Your name"
                         className={styles.formInput}
                         required
                       />
@@ -185,7 +185,7 @@ export default function Contact() {
                         type="email"
                         value={formData.email}
                         onChange={handleFormChange}
-                        placeholder="john@example.com"
+                        placeholder="your@email.com"
                         className={styles.formInput}
                         required
                       />

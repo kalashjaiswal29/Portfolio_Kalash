@@ -2,17 +2,19 @@ import { useScrollReveal } from '../../hooks/useScrollReveal';
 import styles from './About.module.css';
 
 const SKILLS = [
-  { name: 'React / Next.js', pct: '88%' },
+  { name: 'React JS', pct: '88%' },
   { name: 'Node.js / Express', pct: '85%' },
   { name: 'MongoDB / Databases', pct: '80%' },
-  { name: 'Python / FastAPI', pct: '72%' },
-  { name: 'System Architecture', pct: '78%' },
+  { name: 'RestAPI', pct: '72%' },
+  { name: 'Socket.io / WebRTC', pct: '60%' },
+  { name: 'Java / DSA', pct: '40%' },
+  // { name: 'System Architecture', pct: '78%' },
 ];
 
 const TECH = [
   'React', 'Node.js', 'Express.js', 'MongoDB', 'Socket.io',
-  'WebRTC', 'Python', 'FastAPI', 'JWT', 'REST APIs',
-  'Git', 'Vercel', 'Render', 'Linux', 'Docker (basics)',
+  'WebRTC', 'Python', 'JWT', 'REST APIs',
+  'Git', 'Vercel', 'Render', 'Linux', 'Java-DSA',
 ];
 
 export default function About() {
@@ -20,7 +22,7 @@ export default function About() {
 
   return (
     <section
-      className={`${styles.section} section-padding`}
+      className={`${styles.section} `}
       id="about"
       aria-label="About Me"
       ref={sectionRef}
@@ -46,17 +48,14 @@ export default function About() {
 
             {/* Floating stats card */}
             <div className={styles.floatCard} data-reveal="right" data-reveal-delay="3">
+
               <div className={styles.floatStat}>
-                <span className={styles.floatStatNum}>2+</span>
-                <span className={styles.floatStatLabel}>Years of<br/>Experience</span>
-              </div>
-              <div className={styles.floatStat}>
-                <span className={styles.floatStatNum}>10+</span>
-                <span className={styles.floatStatLabel}>Projects<br/>Delivered</span>
+                <span className={styles.floatStatNum}>3+</span>
+                <span className={styles.floatStatLabel}>Projects<br />Delivered</span>
               </div>
               <div className={styles.floatStat}>
                 <span className={styles.floatStatNum}>1</span>
-                <span className={styles.floatStatLabel}>Startup<br/>Founded</span>
+                <span className={styles.floatStatLabel}>Startup<br />Founded</span>
               </div>
             </div>
           </div>
@@ -74,11 +73,9 @@ export default function About() {
               <strong style={{ color: 'var(--color-accent)' }}>GetIntern.in</strong>, an MSME-registered
               virtual internship platform — designed, built, and launched it solo from scratch.
             </p>
-            <p className={styles.desc} data-reveal data-reveal-delay="4">
-              My strength lies in bridging backend robustness with smooth frontend experiences.
-              I enjoy working on challenging architectures — real-time systems, auth flows,
-              and scalable API design. When I'm not coding, I'm probably thinking about code.
-            </p>
+            <p className={styles.desc} data-reveal data-reveal-delay="4">My strength lies in bridging backend robustness with smooth frontend experiences. I enjoy working on challenging logic & systems — real-time features, auth flows, and scalable API design. Currently, I'm actively leveling up my problem-solving skills by diving deep into Data Structures and Algorithms in Java.
+
+              When I'm not building products, I'm probably thinking about code</p>
 
             <div className={styles.skillsWrap} data-reveal data-reveal-delay="5">
               <p className={styles.skillsTitle}>Core Proficiencies</p>

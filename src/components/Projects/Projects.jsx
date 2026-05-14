@@ -7,7 +7,7 @@ const PROJECTS = [
   {
     id: 'getintern',
     title: 'GetIntern.in',
-    desc: 'MSME-registered virtual internship platform. Full task management, automated PDF certificate generation, and role-based auth for admins and interns.',
+    desc: 'MSME-registered virtual internship platform. Full task management',
     tags: ['React', 'Node.js', 'MongoDB', 'Socket.io', 'JWT'],
     status: 'live',
     featured: true,
