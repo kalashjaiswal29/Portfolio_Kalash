@@ -57,7 +57,7 @@ export default function Contact() {
 
     const formData = new FormData(e.target);
     console.log("Form Data:", formData);
-    formData.append("access_key", "64948517-afa6-470d-901e-e1414b7291a2");
+    formData.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
@@ -111,7 +111,7 @@ export default function Contact() {
     setIsFormSending(true);
 
     const payload = new FormData(e.target);
-    payload.append("access_key", "64948517-afa6-470d-901e-e1414b7291a2");
+    payload.append("access_key", import.meta.env.VITE_WEB3FORMS_KEY);
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
