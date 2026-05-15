@@ -6,7 +6,7 @@ import styles from './Hero.module.css';
 const SOCIALS = [
   { icon: Code2, href: 'https://github.com/kalashjaiswal29', label: 'GitHub' },
   { icon: Users2, href: 'https://www.linkedin.com/in/kalash-jaiswal-15bb6b323/', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:kalashjaiswal29@gmail.com', label: 'Email' },
+  { icon: Mail, href: 'mailto:kalashjaiswal57@gmail.com', label: 'Email' },
 ];
 
 export default function Hero() {

@@ -6,7 +6,7 @@ import styles from './Contact.module.css';
 const SOCIALS = [
   { icon: Code2, href: 'https://github.com/kalashjaiswal29', label: 'GitHub' },
   { icon: Users2, href: 'https://www.linkedin.com/in/kalash-jaiswal-15bb6b323/', label: 'LinkedIn' },
-  { icon: Mail, href: 'mailto:kalashjaiswal29@gmail.com', label: 'Email' },
+  { icon: Mail, href: 'mailto:kalashjaiswal57@gmail.com', label: 'Email' },
 ];
 
 function Footer() {
@@ -43,24 +43,77 @@ export default function Contact() {
   const [email, setEmail] = useState('');
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
   const [ctaSent, setCtaSent] = useState(false);
+  const [isCtaSending, setIsCtaSending] = useState(false); // Add this
+  const [isFormSending, setIsFormSending] = useState(false);
   const [formSent, setFormSent] = useState(false);
 
   const ctaRef = useScrollReveal();
   const formRef = useScrollReveal();
 
-  const handleCtaSubmit = (e) => {
+  const handleCtaSubmit = async (e) => {
     e.preventDefault();
-    if (email.trim()) { setCtaSent(true); setEmail(''); }
+    setIsCtaSending(true); // Set loading state
+
+    const formData = new FormData(e.target);
+    console.log("Form Data:", formData);
+    formData.append("access_key", "64948517-afa6-470d-901e-e1414b7291a2");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setCtaSent(true); // Only set true on success
+        setEmail('');
+      } else {
+        console.error("Error", data);
+        // Optional: Handle error UI here
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+    } finally {
+      setIsCtaSending(false); // Remove loading state
+    }
   };
 
   const handleFormChange = (e) => {
     setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+
   };
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setFormSent(true);
-    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsFormSending(true); // Set loading state
+
+    const formData = new FormData(e.target);
+    console.log("Form Data:", formData);
+    formData.append("access_key", "64948517-afa6-470d-901e-e1414b7291a2");
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        body: formData
+      });
+
+      const data = await response.json();
+
+      if (data.success) {
+        setFormSent(true); // Only set true on success
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        console.error("Error", data);
+        // Optional: Handle error UI here
+      }
+    } catch (error) {
+      console.error("Fetch error:", error);
+    } finally {
+      setIsFormSending(false); // Remove loading state
+    }
+
   };
 
   return (
@@ -95,6 +148,7 @@ export default function Contact() {
                 <input
                   id="cta-email-input"
                   type="email"
+                  name="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
                   placeholder="your@email.com"
@@ -102,9 +156,16 @@ export default function Contact() {
                   required
                   aria-label="Your email address"
                 />
-                <button type="submit" className={styles.emailSubmit} id="cta-submit-btn">
+                {/* Change this inside the CTA form */}
+                <button
+                  type="submit"
+                  className={styles.emailSubmit}
+                  id="cta-submit-btn"
+                  disabled={isCtaSending}
+                  style={{ opacity: isCtaSending ? 0.7 : 1, cursor: isCtaSending ? 'not-allowed' : 'pointer' }}
+                >
                   <Rocket size={15} aria-hidden="true" />
-                  Let's Talk
+                  {isCtaSending ? "Sending..." : "Let's Talk"}
                 </button>
               </form>
             )}
@@ -216,9 +277,15 @@ export default function Contact() {
                       required
                     />
                   </div>
-                  <button type="submit" className={styles.formSubmit} id="contact-submit-btn">
+                  <button
+                    type="submit"
+                    className={styles.formSubmit}
+                    id="contact-submit-btn"
+                    disabled={isFormSending}
+                    style={{ opacity: isFormSending ? 0.7 : 1, cursor: isFormSending ? 'not-allowed' : 'pointer' }}
+                  >
                     <Send size={16} aria-hidden="true" />
-                    Send Message
+                    {isFormSending ? "Sending..." : "Send Message"}
                   </button>
                 </form>
               )}
@@ -231,3 +298,4 @@ export default function Contact() {
     </>
   );
 }
+
