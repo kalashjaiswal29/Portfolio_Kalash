@@ -42,8 +42,9 @@ function Footer() {
 export default function Contact() {
   const [email, setEmail] = useState('');
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [formErrors, setFormErrors] = useState({});
   const [ctaSent, setCtaSent] = useState(false);
-  const [isCtaSending, setIsCtaSending] = useState(false); // Add this
+  const [isCtaSending, setIsCtaSending] = useState(false);
   const [isFormSending, setIsFormSending] = useState(false);
   const [formSent, setFormSent] = useState(false);
 
@@ -85,35 +86,52 @@ export default function Contact() {
 
   };
 
+  const validateForm = () => {
+    const errors = {};
+    if (!formData.name.trim()) errors.name = 'Full name is required.';
+    if (!formData.email.trim()) {
+      errors.email = 'Email is required.';
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
+      errors.email = 'Please enter a valid email address.';
+    }
+    if (!formData.subject.trim()) errors.subject = 'Subject is required.';
+    if (!formData.message.trim()) errors.message = 'Message is required.';
+    return errors;
+  };
+
   const handleFormSubmit = async (e) => {
     e.preventDefault();
-    setIsFormSending(true); // Set loading state
 
-    const formData = new FormData(e.target);
-    console.log("Form Data:", formData);
-    formData.append("access_key", "64948517-afa6-470d-901e-e1414b7291a2");
+    const errors = validateForm();
+    if (Object.keys(errors).length > 0) {
+      setFormErrors(errors);
+      return;
+    }
+    setFormErrors({});
+    setIsFormSending(true);
+
+    const payload = new FormData(e.target);
+    payload.append("access_key", "64948517-afa6-470d-901e-e1414b7291a2");
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {
         method: "POST",
-        body: formData
+        body: payload
       });
 
       const data = await response.json();
 
       if (data.success) {
-        setFormSent(true); // Only set true on success
+        setFormSent(true);
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         console.error("Error", data);
-        // Optional: Handle error UI here
       }
     } catch (error) {
       console.error("Fetch error:", error);
     } finally {
-      setIsFormSending(false); // Remove loading state
+      setIsFormSending(false);
     }
-
   };
 
   return (
@@ -223,7 +241,7 @@ export default function Contact() {
                   </button>
                 </div>
               ) : (
-                <form className={styles.form} onSubmit={handleFormSubmit} aria-label="Contact form" noValidate>
+                <form className={styles.form} onSubmit={handleFormSubmit} aria-label="Contact form">
                   <div className={styles.formRow}>
                     <div className={styles.formField}>
                       <label className={styles.formLabel} htmlFor="contact-name">Full Name</label>
@@ -234,9 +252,10 @@ export default function Contact() {
                         value={formData.name}
                         onChange={handleFormChange}
                         placeholder="Your name"
-                        className={styles.formInput}
+                        className={`${styles.formInput}${formErrors.name ? ` ${styles.inputError}` : ''}`}
                         required
                       />
+                      {formErrors.name && <span className={styles.fieldError}>{formErrors.name}</span>}
                     </div>
                     <div className={styles.formField}>
                       <label className={styles.formLabel} htmlFor="contact-email">Email</label>
@@ -247,9 +266,10 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleFormChange}
                         placeholder="your@email.com"
-                        className={styles.formInput}
+                        className={`${styles.formInput}${formErrors.email ? ` ${styles.inputError}` : ''}`}
                         required
                       />
+                      {formErrors.email && <span className={styles.fieldError}>{formErrors.email}</span>}
                     </div>
                   </div>
                   <div className={styles.formFieldStandalone}>
@@ -261,9 +281,10 @@ export default function Contact() {
                       value={formData.subject}
                       onChange={handleFormChange}
                       placeholder="Project Collaboration"
-                      className={styles.formInput}
+                      className={`${styles.formInput}${formErrors.subject ? ` ${styles.inputError}` : ''}`}
                       required
                     />
+                    {formErrors.subject && <span className={styles.fieldError}>{formErrors.subject}</span>}
                   </div>
                   <div className={styles.formFieldStandalone}>
                     <label className={styles.formLabel} htmlFor="contact-message">Message</label>
@@ -273,9 +294,10 @@ export default function Contact() {
                       value={formData.message}
                       onChange={handleFormChange}
                       placeholder="Tell me about your project idea..."
-                      className={styles.formTextarea}
+                      className={`${styles.formTextarea}${formErrors.message ? ` ${styles.inputError}` : ''}`}
                       required
                     />
+                    {formErrors.message && <span className={styles.fieldError}>{formErrors.message}</span>}
                   </div>
                   <button
                     type="submit"

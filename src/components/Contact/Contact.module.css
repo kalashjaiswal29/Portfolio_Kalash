@@ -292,6 +292,17 @@
   box-shadow: 0 0 0 3px var(--color-accent-dim);
 }
 
+.inputError {
+  border-color: #f87171 !important;
+  box-shadow: 0 0 0 3px rgba(248, 113, 113, 0.15) !important;
+}
+
+.fieldError {
+  font-size: var(--text-xs);
+  color: #f87171;
+  margin-top: calc(var(--space-1) * -0.5);
+}
+
 .formTextarea {
   resize: vertical;
   min-height: 140px;
