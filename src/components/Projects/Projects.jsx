@@ -6,15 +6,15 @@ import styles from './Projects.module.css';
 
 /* ── Attendance slideshow images ─────────────────────────────── */
 const ATTENDANCE_SLIDES = [
-  '/Screenshot 2026-05-15 233955.png',
-  '/Screenshot 2026-05-15 234012.png',
-  '/Screenshot 2026-05-15 234033.png',
+  '/Screenshot 2026-05-15 233955.webp',
+  '/Screenshot 2026-05-15 234012.webp',
+  '/Screenshot 2026-05-15 234033.webp',
 ];
 
 /* ── BuddyChat slideshow images (1902×958 ≈ 2:1) ─────────────── */
 const BUDDYCHAT_SLIDES = [
-  '/Screenshot 2026-05-16 002625.png',
-  '/Screenshot 2026-05-16 002645.png',
+  '/Screenshot 2026-05-16 002625.webp',
+  '/Screenshot 2026-05-16 002645.webp',
 ];
 
 const PROJECTS = [
@@ -163,9 +163,8 @@ function ProjectSlideshow({ slides, gradient, label }) {
           key={src}
           src={src}
           alt={`${label} screenshot ${i + 1}`}
-          className={`${styles.slide} ${i === active ? styles.slideActive : ''} ${
-            i === active && fading ? styles.slideFading : ''
-          }`}
+          className={`${styles.slide} ${i === active ? styles.slideActive : ''} ${i === active && fading ? styles.slideFading : ''
+            }`}
         />
       ))}
 
@@ -192,15 +191,15 @@ function ProjectSlideshow({ slides, gradient, label }) {
 /* ── Video preview sub-component ─────────────────────────────── */
 function ProjectVideo({ src, label }) {
   const videoRef = useRef(null);
-  const wrapRef  = useRef(null);
-  const visible  = useIsVisible(wrapRef);
+  const wrapRef = useRef(null);
+  const visible = useIsVisible(wrapRef);
 
   /* Play/pause based on viewport visibility */
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
     if (visible) {
-      video.play().catch(() => {}); // swallow autoplay-policy errors
+      video.play().catch(() => { }); // swallow autoplay-policy errors
     } else {
       video.pause();
     }
@@ -214,7 +213,7 @@ function ProjectVideo({ src, label }) {
       if (document.hidden) {
         video.pause();
       } else if (visible) {
-        video.play().catch(() => {});
+        video.play().catch(() => { });
       }
     };
     document.addEventListener('visibilitychange', onVisChange);
@@ -276,8 +275,8 @@ export default function Projects({ limitTo = null }) {
               {/* Media */}
               <div
                 className={`${styles.cardMedia}${slides ? ' ' + styles.cardMediaSlideshow
-                    : video ? ' ' + styles.cardMediaVideo
-                      : ''
+                  : video ? ' ' + styles.cardMediaVideo
+                    : ''
                   }`}
               >
                 {slides ? (
